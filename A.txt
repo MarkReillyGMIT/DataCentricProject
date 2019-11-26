@@ -1,0 +1,1 @@
+select Count(indepyear) as "Independent Countries" from country;
