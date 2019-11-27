@@ -30,7 +30,7 @@ public class DAO {
 		
 		myConn = mysqlDS.getConnection();
 
-		String sql = "select * from store";
+		String sql = "select * from store ";
 
 		myStmt = myConn.createStatement();
 
@@ -49,6 +49,39 @@ public class DAO {
 		}	
 		return stores;
 	}
+	
+	//loadStoresAndProducts
+		public ArrayList<Store> loadStoresAndProducts() throws Exception {
+			
+			Connection myConn = null;
+			Statement myStmt = null;
+			ResultSet myRs = null;
+
+			
+			myConn = mysqlDS.getConnection();
+
+			String sql = "select s.id, s.name, s.founded, p.sid, p.prodName, p.price from store as s inner join product p on s.id = p.sid;";
+
+			myStmt = myConn.createStatement();
+
+			myRs = myStmt.executeQuery(sql);
+			
+			
+			ArrayList<Store> storesAndproducts = new ArrayList<Store>();
+
+			// process result set
+			while (myRs.next()) {
+				Store p = new Store();
+				p.setStoreID(myRs.getInt("id"));
+				p.setStoreName(myRs.getString("name"));
+				p.setFounded(myRs.getString("founded"));
+				p.setProductID(myRs.getInt("sid"));
+				p.setProductName(myRs.getString("prodName"));
+				p.setPrice(myRs.getDouble("price"));
+				storesAndproducts.add(p);
+			}	
+			return storesAndproducts;
+		}
 	
 	//loadProducts
 	public ArrayList<Product> loadProducts() throws Exception {

@@ -18,6 +18,7 @@ public class StoreController {
 	
 	DAO dao;
 	ArrayList<Store> stores;
+	ArrayList<Store> storesAndproducts;
 	public StoreController() {
 		super();
 		try {
@@ -32,6 +33,16 @@ public class StoreController {
 		System.out.println("in loadStores");
 		try {
 			stores =dao.loadStores();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadStoresAndProducts() {
+		System.out.println("in loadStoresAndProducts");
+		try {
+			storesAndproducts =dao.loadStoresAndProducts();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,6 +77,9 @@ public class StoreController {
 
 	public ArrayList<Store> getStores() {
 		return stores;
+	}
+	public ArrayList<Store> getStoresAndproducts() {
+		return storesAndproducts;
 	}
 	
 	public String deleteStore(int storeID) {
