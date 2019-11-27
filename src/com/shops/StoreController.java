@@ -1,5 +1,6 @@
 package com.shops;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
@@ -67,9 +68,14 @@ public class StoreController {
 		return stores;
 	}
 	
-	public String delete(int storeID) {
+	public String deleteStore(int storeID) {
 		System.out.println(storeID);
-		dao.delete(storeID);
+		try {
+			dao.deleteStore(storeID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -109,15 +110,31 @@ public class DAO {
 		myStmt.execute();			
 	}
 	
-	//Delete Store
-	public void delete(int storeID) {
-		System.out.println("Deleted " + storeID );
-	}
+	//Delete Store Method
+		public void deleteStore(int storeID) throws SQLException {
+			Connection myConn = null;
+			PreparedStatement myStmt = null;
+			ResultSet myRs = null;
+			
+			myConn = mysqlDS.getConnection();
+			String sql = "delete from store where id = ?";
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setInt(1, storeID);
+			myStmt.execute();			
+		}
 	
 	//Delete Product
-	public void deleteProduct(int productID) {
-		System.out.println("Deleted " + productID );
-	}
+		public void deleteProduct(int productID) throws SQLException {
+			Connection myConn = null;
+			PreparedStatement myStmt = null;
+			ResultSet myRs = null;
+			
+			myConn = mysqlDS.getConnection();
+			String sql = "delete from store where id = ?";
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setInt(1, productID);
+			myStmt.execute();			
+		}
 }
 /*
  * public class DAO {
