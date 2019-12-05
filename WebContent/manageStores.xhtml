@@ -13,6 +13,9 @@
 	</f:metadata>
 	
 	<h:outputStylesheet library="css" name="tables.css"/>
+	<h:outputStylesheet library="css" name="styles.css"/>
+	
+	<h:messages globalOnly="true" errorClass="error"/>
 	
 	<h:form>
 	   <h:commandButton action = "addStore" value = "Add Store" />
@@ -37,9 +40,9 @@
 	</h:column>
 	<h:column>
  	  <f:facet name="header">Action</f:facet>
- 	  <h:commandLink value="Show Products" action="showProducts"/>
+ 	  <h:commandLink value="Show Products" action="#{storeController.loadStoresAndProducts(s.storeID)}"/>
  	  <a value=" "></a>
- 	  <h:commandLink value="Delete" action="#{storeController.deleteStore(s.storeID)}"/>
+ 	  <h:commandLink value="Delete" action="#{storeController.deleteStore(s.storeID, s.storeName)}"/>
 	</h:column>
   	</h:dataTable>
   	</h:form>

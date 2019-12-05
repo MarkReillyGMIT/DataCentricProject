@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class Product {
 	
+	int storeID;
 	int productID;
 	String productName;
 	double price;
@@ -25,6 +26,12 @@ public class Product {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public int getStoreID() {
+		return storeID;
+	}
+	public void setStoreID(int storeID) {
+		this.storeID = storeID;
 	}
 
 }

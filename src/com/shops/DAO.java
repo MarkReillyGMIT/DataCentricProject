@@ -51,7 +51,7 @@ public class DAO {
 	}
 	
 	//loadStoresAndProducts
-		public ArrayList<Store> loadStoresAndProducts() throws Exception {
+		public ArrayList<Store> loadStoresAndProducts(int storeID) throws Exception {
 			
 			Connection myConn = null;
 			Statement myStmt = null;
@@ -60,14 +60,15 @@ public class DAO {
 			
 			myConn = mysqlDS.getConnection();
 
-			String sql = "select s.id, s.name, s.founded, p.sid, p.prodName, p.price from store as s inner join product p on s.id = p.sid;";
-
+			String sql = "select s.id, s.name, s.founded, p.sid, p.prodName, p.price from store as s inner join product p on s.id = p.sid where p.sid =" + storeID + "";
+			
+			
 			myStmt = myConn.createStatement();
 
 			myRs = myStmt.executeQuery(sql);
-			
-			
+						
 			ArrayList<Store> storesAndproducts = new ArrayList<Store>();
+			
 
 			// process result set
 			while (myRs.next()) {
@@ -93,7 +94,7 @@ public class DAO {
 			
 			myConn = mysqlDS.getConnection();
 	
-			String sql = "select * from product";
+			String sql = "select s.id, p.pid, p.prodName, p.price from store as s inner join product p on s.id = p.sid order by pid";
 	
 			myStmt = myConn.createStatement();
 	
@@ -105,7 +106,8 @@ public class DAO {
 			// process result set
 			while (myRs.next()) {
 				Product p = new Product();
-				p.setProductID(myRs.getInt("sid"));
+				p.setStoreID(myRs.getInt("id"));
+				p.setProductID(myRs.getInt("pid"));
 				p.setProductName(myRs.getString("prodName"));
 				p.setPrice(myRs.getDouble("price"));
 				products.add(p);
@@ -143,7 +145,7 @@ public class DAO {
 		myStmt.execute();			
 	}
 	
-	//Delete Store Method
+	//Delete Store 
 		public void deleteStore(int storeID) throws SQLException {
 			Connection myConn = null;
 			PreparedStatement myStmt = null;
@@ -163,7 +165,7 @@ public class DAO {
 			ResultSet myRs = null;
 			
 			myConn = mysqlDS.getConnection();
-			String sql = "delete from store where id = ?";
+			String sql = "delete from product where pid = ?";
 			myStmt = myConn.prepareStatement(sql);
 			myStmt.setInt(1, productID);
 			myStmt.execute();			

@@ -83,12 +83,11 @@ public class ProductController {
 		return stores;
 	}
 	
-	public String deleteProduct(int productID) {
-		System.out.println(productID);
+	public String deleteProduct(int productID, String productName) {
+		System.out.println("Deleted "+productName);
 		try {
 			dao.deleteProduct(productID);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

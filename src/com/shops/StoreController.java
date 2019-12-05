@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.mysql.jdbc.CommunicationsException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 
 @ManagedBean
@@ -39,18 +40,22 @@ public class StoreController {
 		}
 	}
 	
-	public void loadStoresAndProducts() {
-		System.out.println("in loadStoresAndProducts");
+	public String loadStoresAndProducts(int storeID) {
+		System.out.println("in loadStoresAndProducts" + storeID);
 		try {
-			storesAndproducts =dao.loadStoresAndProducts();
+			storesAndproducts =dao.loadStoresAndProducts(storeID);
+			System.out.println("exiting loadStoresAndProducts");
+			return "showProducts.xhtml";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
+		return null;
 	}
 	
 	public String addStore(Store p) {
-		System.out.println(p.getStoreID() + "  " +p.getStoreName() + "  " + p.getFounded());
+		System.out.println("Added "+p.getStoreID() + "  " +p.getStoreName() + "  " + p.getFounded());
 		try {
 			dao.addStore(p);
 			return "manageStores";
@@ -82,12 +87,19 @@ public class StoreController {
 		return storesAndproducts;
 	}
 	
-	public String deleteStore(int storeID) {
+	public String deleteStore(int storeID, String storeName) throws MySQLIntegrityConstraintViolationException {
 		System.out.println(storeID);
 		try {
 			dao.deleteStore(storeID);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch(MySQLIntegrityConstraintViolationException e) {
+			FacesMessage message = 
+			new FacesMessage("Error: Store " + storeName + " has not been deleted from MySQL DB, contains products");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}catch (SQLException e) {
+			FacesMessage message = 
+			new FacesMessage("Error:" + e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			
 			e.printStackTrace();
 		}
 		return null;

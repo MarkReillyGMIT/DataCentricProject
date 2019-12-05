@@ -1,7 +1,0 @@
-select c.Name, c.Population
-from country co
-Inner Join city c
-ON co.code = c.countrycode
-where co.code = "GRC"
-AND LENGTH(c.name) > 6
-ORDER by c.name;

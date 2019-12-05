@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:h="http://xmlns.jcp.org/jsf/html"
-  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   xmlns:f="http://xmlns.jcp.org/jsf/core">
   
   <h:head>
     <title>Manage Head Offices</title>
   </h:head>
   
+  	<f:metadata>
+  		<f:event type="preRenderView" 
+      	listener="#{headOfficeController.loadHeadOffices()}"/>
+	</f:metadata>
+	
+	<h:outputStylesheet library="css" name="tables.css"/>
+	<h:outputStylesheet library="css" name="styles.css"/>
+	
+	<h:messages globalOnly="true" errorClass="error"/>
+	
+	<h:form>
+	   <h:commandButton  value = "Add Head Office" />
+	</h:form>
+	<br></br>
   <h:body>
-    
+  	<h:form>
+  	<h:dataTable value="#{headofficeController.headOfficesList}" var="h"
+  	headerClass="table-header"
+	rowClasses="table-odd-row,table-even-row">
+	<h:column>
+ 	  <f:facet name="header">Store ID</f:facet>
+ 	  #{h.storeID}
+	</h:column>
+	<h:column>
+ 	  <f:facet name="header">Location</f:facet>
+ 	  #{h.location}
+	</h:column>
+  	</h:dataTable>
+  	</h:form>
   </h:body>
+  <br></br>
+  <h:link value="Home" outcome="index"/>
 </html>
