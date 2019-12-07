@@ -6,6 +6,7 @@ public class HeadOffice {
 	
 	int storeID;
 	String location;
+	
 	public int getStoreID() {
 		return storeID;
 	}

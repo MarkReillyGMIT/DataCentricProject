@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  
+  <h:head>
+    <title>Add Head Office</title>
+  </h:head>
+  	<h:outputStylesheet library="css" name="styles.css"/>
+  <h:body>
+  	<h:messages globalOnly="true" errorClass="error"/>
+    <h:form>
+    	Store ID:		<h:inputText value="#{headOffice.storeID}" id="storeId" 
+		required="true" requiredMessage="ID is mandatory"/><br/>
+		<h:message for="storeId" errorClass="error" /><br/>
+        Location:		<h:inputText value="#{headOffice.location}" id="location" 
+		required="true" requiredMessage="Location is mandatory"/><br/>
+      <h:commandButton value="Add" action="#{headOfficeController.addHeadOffice(headOffice)}"/>  
+   </h:form>
+  </h:body>
+  <br></br>
+  <h:link value="Home" outcome="index"/>
+  <a value=" "></a>
+  <h:link value=" Stores" outcome="manageStores"/>
+</html>

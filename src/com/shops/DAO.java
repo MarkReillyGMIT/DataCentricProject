@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class DAO {
 	DataSource mysqlDS;
 	
+	/* =============================================================================
+	 * ========================= Constructor
+	 *=============================================================================
+	 */
+	
 	public DAO() throws Exception {
 		Context context = new InitialContext();
 		String jndiName = "java:comp/env/shops";
@@ -171,18 +176,4 @@ public class DAO {
 			myStmt.execute();			
 		}
 }
-/*
- * public class DAO {
- * 
- * private DataSource mysqlDS;
- * 
- * 
- * =============================================================================
- * ========================= Constructor
- * =============================================================================
- * ========================= public DAO() throws Exception { Context context =
- * new InitialContext(); String jndiName = "java:comp/env/shops"; mysqlDS =
- * (DataSource) context.lookup(jndiName); }
- * 
- * }
- */
+
