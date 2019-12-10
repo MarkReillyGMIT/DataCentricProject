@@ -10,12 +10,13 @@
   <h:body>
   	<h:messages globalOnly="true" errorClass="error"/>
     <h:form>
-    	Store ID:		<h:inputText value="#{headOffice.storeID}" id="storeId" 
+    	Store ID:		<h:inputText value="#{headOffice._id}" id="_id" 
 		required="true" requiredMessage="ID is mandatory"/><br/>
-		<h:message for="storeId" errorClass="error" /><br/>
+		<h:message for="_id" errorClass="error" /><br/>
         Location:		<h:inputText value="#{headOffice.location}" id="location" 
 		required="true" requiredMessage="Location is mandatory"/><br/>
-      <h:commandButton value="Add" action="#{headOfficeController.addHeadOffice(headOffice)}"/>  
+		<h:message for="location" errorClass="error" /><br/>
+      <h:commandButton value="Add" action="#{headOfficeController.addHeadOffices(headOffice)}"/>  
    </h:form>
   </h:body>
   <br></br>

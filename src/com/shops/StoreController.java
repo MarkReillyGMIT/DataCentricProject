@@ -34,6 +34,11 @@ public class StoreController {
 		System.out.println("in loadStores");
 		try {
 			stores =dao.loadStores();
+		}catch(SQLException e){
+			FacesMessage message = 
+			new FacesMessage("Error: Cannot connect to MySQL Database");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,7 +51,7 @@ public class StoreController {
 			storesAndproducts =dao.loadStoresAndProducts(storeID);
 			System.out.println("exiting loadStoresAndProducts");
 			return "showProducts.xhtml";
-		} catch (Exception e) {
+		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			

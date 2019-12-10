@@ -1,13 +1,10 @@
 package com.shops;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import org.bson.Document;
 
 import com.google.gson.Gson;
-import com.mongodb.BasicDBList;
-import com.mongodb.DBCursor;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -34,11 +31,17 @@ public class MongoDAO {
 		database = mongoClient.getDatabase(mongoDB);
 		collection = database.getCollection(mongoCollection);
 		
+		
+		
 	}
 	
 	public ArrayList<HeadOffice> loadHeadOffices() throws Exception{
+		
+		BasicDBObject query = new BasicDBObject();
+		query.put("_id", new BasicDBObject("$exists", true));
+		
 		ArrayList<HeadOffice> headOfficesList = new ArrayList<HeadOffice>();
-		FindIterable<Document> headOffices = collection.find();
+		FindIterable<Document> headOffices = collection.find(query);
 		System.out.println("in Mongo loadHeadOffices()");
 		
 		for (Document d : headOffices) {
@@ -46,13 +49,22 @@ public class MongoDAO {
 			HeadOffice headOffice = gson.fromJson(d.toJson(),HeadOffice.class);	
 			headOfficesList.add(headOffice);
 			}
-		System.out.println( "Array" + headOfficesList);
 	
-		
 		
 		return headOfficesList; 
 		   
 	}
+	
+	//Add Method
+		public void addHeadOffices(HeadOffice hosc){
+			System.out.println("adding data..");
+			Document d = new Document();
+			d.append("_id",hosc.get_id());
+			d.append("location",hosc.getLocation());
+			collection.insertOne(d);
+			System.out.println("data added..");
+		}
+	
 }
 	
 	

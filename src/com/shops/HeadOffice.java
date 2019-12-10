@@ -4,14 +4,14 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class HeadOffice {
 	
-	int storeID;
+	int _id;
 	String location;
 	
-	public int getStoreID() {
-		return storeID;
+	public int get_id() {
+		return _id;
 	}
-	public void setStoreID(int storeID) {
-		this.storeID = storeID;
+	public void set_id(int _id) {
+		this._id = _id;
 	}
 	public String getLocation() {
 		return location;

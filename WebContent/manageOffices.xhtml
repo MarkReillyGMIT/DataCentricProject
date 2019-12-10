@@ -23,12 +23,12 @@
 	<br></br>
   <h:body>
   	<h:form>
-  	<h:dataTable value="#{headofficeController.headOfficesList}" var="h"
+  	<h:dataTable value="#{headOfficeController.headOfficesList}" var="h"
   	headerClass="table-header"
 	rowClasses="table-odd-row,table-even-row">
 	<h:column>
  	  <f:facet name="header">Store ID</f:facet>
- 	  #{h.storeID}
+ 	  #{h._id}
 	</h:column>
 	<h:column>
  	  <f:facet name="header">Location</f:facet>
